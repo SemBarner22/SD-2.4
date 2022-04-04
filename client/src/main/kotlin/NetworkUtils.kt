@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets
 class NetworkUtils(private val url: String) {
     class HttpResponse {
         var response: String? = null
-        var code = 0
+        var code: Int = 0
     }
 
     @Throws(IOException::class)
@@ -86,7 +86,7 @@ class NetworkUtils(private val url: String) {
     }
 
     fun queryPrice(shareQualifiedName: String): Double {
-        val resp = doGetRequest("share-info", java.util.Map.of())
+        val resp = doGetRequest("share-info", emptyMap())
         val split = resp.response!!.split(System.lineSeparator()).toTypedArray()
         for (line in split) {
             if (line.contains("'$shareQualifiedName'")) {

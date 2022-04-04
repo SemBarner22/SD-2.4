@@ -4,7 +4,7 @@ import org.junit.Test
 class NetworkUtilsTest : BaseTest() {
     @Test
     fun testQueryPriceNoSuchShare() {
-        Assert.assertThrows(IllegalArgumentException::class.java) { shareClient.queryPrice("no-such-share") }
+        Assert.assertThrows(RuntimeException::class.java) { shareClient.queryPrice("no-such-share") }
     }
 
     @Test
@@ -13,7 +13,7 @@ class NetworkUtilsTest : BaseTest() {
     }
 
     @Test
-    fun testModifyTooLowamount() {
+    fun testModifyTooLowAmount() {
         Assert.assertThrows(RuntimeException::class.java) { shareClient.modifyShare("s3", "yandex", -1000, 0.0) }
     }
 

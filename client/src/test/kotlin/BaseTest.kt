@@ -11,15 +11,12 @@ open class BaseTest {
     companion object {
         @get:ClassRule
         @JvmStatic
-        var shareWebServer: GenericContainer<Nothing> = FixedHostPortGenericContainer<Nothing>("share:1.0-SNAPSHOT")
+        var shareWebServer: GenericContainer<Nothing> = FixedHostPortGenericContainer<Nothing>("market:1.0-SNAPSHOT")
                 .withFixedExposedPort(8080, 8080)
 
         @BeforeClass
         @JvmStatic
         fun fillMarket() {
-            for (companyName in companyNames) {
-                shareClient.doPostRequest("new-company", Map.of("name", companyName))
-            }
             shares.forEach { ( _, sharesList: List<Share>) ->
                 sharesList.forEach(Consumer { share: Share ->
                     shareClient.doPostRequest("new-share", Map.of(
